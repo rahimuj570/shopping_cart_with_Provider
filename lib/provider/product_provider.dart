@@ -104,6 +104,7 @@ class ProductProvider extends ChangeNotifier {
   }
 
   void addTocart(Map<String, dynamic> product) {
+    debugPrint(_cartList.where((x) => x['id'] == product['id']).toString());
     if (_cartList.where((x) => x['id'] == product['id']).isEmpty) {
       _cartList.add(product);
       notifyListeners();

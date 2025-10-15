@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_cart_with_provider/provider/product_provider.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({super.key, required this.product});
@@ -35,7 +37,9 @@ class ProductCard extends StatelessWidget {
             top: 5,
             child: IconButton(
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-              onPressed: () {},
+              onPressed: () {
+                context.read<ProductProvider>().addTocart(product);
+              },
               icon: Icon(Icons.shopping_cart),
 
               constraints: BoxConstraints(maxHeight: 30, maxWidth: 30),
