@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_cart_with_provider/widgets/custom_appbar.dart';
+import 'package:shopping_cart_with_provider/widgets/custom_drawer.dart';
+import 'package:shopping_cart_with_provider/widgets/product_card.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -89,96 +92,17 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.green,
-          foregroundColor: Colors.white,
-          actionsPadding: EdgeInsets.all(10),
-          title: Text('Cart with Provider'),
-          actions: [Icon(Icons.shopping_cart)],
-        ),
-
+        appBar: CustomAppbar(),
         body: GridView.builder(
           itemCount: products.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
           ),
-          itemBuilder: (context, index) => Card(
-            child: Stack(
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadiusGeometry.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                      child: Image.network(
-                        products[index]['imageUrl']!,
-                        fit: BoxFit.fill,
-                        errorBuilder: (context, error, stackTrace) =>
-                            Icon(Icons.error, size: 70),
-                        height: 80,
-                        width: double.infinity,
-                      ),
-                    ),
-                    Text(products[index]['name']!),
-                    Text(products[index]['price']!),
-                  ],
-                ),
-                Positioned(
-                  right: 5,
-                  top: 5,
-                  child: IconButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                    ),
-                    onPressed: () {},
-                    icon: Icon(Icons.shopping_cart),
-
-                    constraints: BoxConstraints(maxHeight: 30, maxWidth: 30),
-                    iconSize: 14,
-                    padding: EdgeInsets.all(5),
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ),
+          itemBuilder: (context, index) =>
+              ProductCard(product: products[index]),
         ),
 
-        drawer: Drawer(
-          width: 200,
-          child: Column(
-            children: [
-              DrawerHeader(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(),
-                    Text(
-                      'Md.Rahimujjaman Rahim',
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    Text('Totat Carted: 10'),
-                  ],
-                ),
-              ),
-              ListTile(
-                hoverColor: Colors.green.shade100,
-                onTap: () {},
-                leading: Icon(Icons.shopping_cart),
-                title: Text('Cart'),
-              ),
-              ListTile(
-                hoverColor: Colors.green.shade100,
-                onTap: () {},
-                leading: Icon(Icons.shopping_bag),
-                title: Text('Shop'),
-              ),
-            ],
-          ),
-        ),
+        drawer: CustomDrawer(),
       ),
     );
   }
