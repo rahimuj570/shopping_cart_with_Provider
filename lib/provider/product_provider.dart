@@ -112,4 +112,9 @@ class ProductProvider extends ChangeNotifier {
   }
 
   int getCartCount() => _cartList.length;
+
+  void removeFromCart(Map<String, dynamic> p) {
+    _cartList.remove(p);
+    notifyListeners();
+  }
 }
