@@ -1,16 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_cart_with_provider/screens/cart_screen.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(ModalRoute.of(context)?.settings.name);
     return AppBar(
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
       actionsPadding: EdgeInsets.all(10),
       title: Text('Cart with Provider'),
-      actions: [Icon(Icons.shopping_cart)],
+      actions: [
+        IconButton(
+          onPressed: () {
+            if (ModalRoute.of(context)?.settings.name != CartScreen.name) {
+              Navigator.pushNamed(context, CartScreen.name);
+            }
+          },
+
+          icon: Icon(Icons.shopping_cart),
+        ),
+      ],
     );
   }
 

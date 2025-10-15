@@ -5,6 +5,7 @@ import 'package:shopping_cart_with_provider/widgets/product_card.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
+  static String name = "home";
 
   final List<Map<String, String>> products = [
     {
