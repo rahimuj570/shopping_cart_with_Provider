@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_cart_with_provider/provider/product_provider.dart';
 import 'package:shopping_cart_with_provider/screens/cart_screen.dart';
 
 class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
@@ -13,14 +15,19 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       actionsPadding: EdgeInsets.all(10),
       title: Text('Cart with Provider', style: TextStyle(fontSize: 20)),
       actions: [
-        IconButton(
-          onPressed: () {
-            if (ModalRoute.of(context)?.settings.name != CartScreen.name) {
-              Navigator.pushNamed(context, CartScreen.name);
-            }
-          },
+        Consumer<ProductProvider>(
+          builder: (context, value, child) => Badge.count(
+            count: value.getCartCount(),
+            child: IconButton(
+              onPressed: () {
+                if (ModalRoute.of(context)?.settings.name != CartScreen.name) {
+                  Navigator.pushNamed(context, CartScreen.name);
+                }
+              },
 
-          icon: Icon(Icons.shopping_cart),
+              icon: Icon(Icons.shopping_cart),
+            ),
+          ),
         ),
       ],
     );
