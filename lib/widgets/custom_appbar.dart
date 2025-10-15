@@ -11,7 +11,7 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
       backgroundColor: Colors.green,
       foregroundColor: Colors.white,
       actionsPadding: EdgeInsets.all(10),
-      title: Text('Cart with Provider'),
+      title: Text('Cart with Provider', style: TextStyle(fontSize: 20)),
       actions: [
         IconButton(
           onPressed: () {
